@@ -24,7 +24,12 @@ const selectError = () => createSelector(
 const selectScouts2 = () => createSelector(
     selectGlobal(),
     (globalState) => globalState.get('scouts2')
-)
+);
+
+const selectNewScout = () => createSelector(
+    selectGlobal(),
+    (globalState) => globalState.get('new_scout')
+);
 
 const selectRepos = () => createSelector(
   selectGlobal(),

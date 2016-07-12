@@ -19,7 +19,11 @@ import {
     LOAD_REPOS,
     LOAD_REPOS_SUCCESS,
     LOAD_REPOS_ERROR,
-    ADD_SCOUT
+    ADD_SCOUT,
+    REMOVE_SCOUT,
+    CHANGE_NEW_USERNAME,
+    CHANGE_NEW_SALE,
+    SUBMIT_BUTTON,
 } from './constants';
 
 /**
@@ -67,5 +71,33 @@ export function addScout(scout) {
     return {
         type: ADD_SCOUT,
         scout
+    }
+}
+
+export function removeScout(scout) {
+    return {
+        type: REMOVE_SCOUT,
+        scout
+    }
+}
+
+export function changeNewUsername(name){
+    return {
+        type: CHANGE_NEW_USERNAME,
+        name
+    }
+}
+
+export function changeNewSale(id, num) {
+    return {
+        type: CHANGE_NEW_SALE,
+        id: id,
+        num
+    }
+}
+
+export function submitButton() {
+    return {
+        type: ADD_SCOUT
     }
 }

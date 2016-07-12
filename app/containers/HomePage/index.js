@@ -15,13 +15,17 @@ import {
     selectLoading,
     selectError,
     selectScouts2,
+    selectNewScout,
 } from 'containers/App/selectors';
 
 import {
     selectUsername,
 } from './selectors';
 
-import { changeUsername } from './actions';
+import {
+    changeUsername
+} from './actions';
+
 import { loadRepos } from '../App/actions';
 
 import RepoListItem from 'containers/RepoListItem';
@@ -33,6 +37,8 @@ import LoadingIndicator from 'components/LoadingIndicator';
 
 import styles from './styles.css';
 
+var types = ["Small Undecorated", "Small Decorated", "Medium Undecorated", "Medium Decorated", "Large"];
+
 export class WreathSaleCategory extends React.Component {
     render() {
         return (
@@ -41,6 +47,45 @@ export class WreathSaleCategory extends React.Component {
                     <tr><th>Product</th><th>Number Sold</th></tr>
                     {this.props.scout.get("sales").map(function (item) {return <tr><td>{item.get('type')}</td><td>{item.get('num')}</td></tr>})}
                 </table>
+            </div>
+        )
+    }
+}
+
+export class NewUsernameField extends React.Component {
+    render () {
+        return (
+            <div>
+                <form className={styles.usernameForm}>
+                    <label htmlFor="New scout name: ">
+                        <input
+                            id="new_scout_form"
+                            className={styles.input}
+                            type="text"
+                            placeholder="A new scout..."
+                            value={this.props.new_scout.name}
+                            onChange={this.props.onAddUsername}
+                        />
+                    </label>
+                </form>
+            </div>
+        )
+    }
+}
+
+export class SubmitButton extends React.Component {
+    render() {
+        return (
+            <div>
+                <form className={styles.sbuttonForm}>
+                    <input
+                        id="submit_button"
+                        className={styles.sbutton}
+                        type="button"
+                        value="Submit new scout"
+                        onClick={this.props.onSubmitButton}
+                    />
+                </form>
             </div>
         )
     }
@@ -72,19 +117,7 @@ export class HomePage extends React.Component {
     };
 
     render() {
-        let mainContent = null;
-
-        // Show a loading indicator when we're loading
-        if (this.props.loading) {
-            mainContent = (<List component={LoadingIndicator} />);
-
-            // Show an error if there is one
-            // If we're not loading, show scout info
-        } else {
-            mainContent = (<div>asdas</div>);
-        }
-
-
+        
         var str = this.props.username.replace(/\s+/g, '');
         switch(this.props.scouts2.get(str)){
             case undefined:
@@ -104,7 +137,7 @@ export class HomePage extends React.Component {
                         <H2>Scout Viewer</H2>
                         <form className={styles.usernameForm} onSubmit={this.props.onSubmitForm}>
                             <label htmlFor="username">Show wreath sales by
-                                <span className={styles.atPrefix}>@</span>
+                                <span className={styles.atPrefix}></span>
                                 <input
                                     id="username"
                                     className={styles.input}
@@ -116,6 +149,12 @@ export class HomePage extends React.Component {
                             </label>
                         </form>
                         <div><WreathSaleCategory scout={this.props.scouts2.get(str)}></WreathSaleCategory></div>
+                    </section>
+                    <section>
+                        <br/><br/>
+                        <NewUsernameField new_scout={this.props.new_scout} onAddUsername={this.props.onAddUsername}></NewUsernameField>
+                        <br/>
+                        <SubmitButton onSubmitButton={this.props.onSubmitButton}></SubmitButton>
                     </section>
                 </div>
             </article>
@@ -135,6 +174,7 @@ HomePage.propTypes = {
         React.PropTypes.bool,
     ]),
     scouts2: React.PropTypes.object,
+    new_scout: React.PropTypes.object,
     onSubmitForm: React.PropTypes.func,
     username: React.PropTypes.string,
     onChangeUsername: React.PropTypes.func,
@@ -144,9 +184,10 @@ function mapDispatchToProps(dispatch) {
     return {
         onChangeUsername: (evt) => dispatch(changeUsername(evt.target.value)),
         changeRoute: (url) => dispatch(push(url)),
+        onAddUsername: (evt) => dispatch(changeNewUsername(evt.target.value)),
+        onSubmitButton: (evt) => dispatch(submitButton()),
         onSubmitForm: (evt) => {
             if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-            dispatch(loadRepos());
         },
 
         dispatch,
@@ -158,6 +199,7 @@ const mapStateToProps = createStructuredSelector({
     username: selectUsername(),
     loading: selectLoading(),
     scouts2: selectScouts2(),
+    new_scout: selectNewScout(),
 });
 
 // Wrap the component to inject dispatch and state into it

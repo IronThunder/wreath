@@ -12,4 +12,8 @@
 export const LOAD_REPOS = 'boilerplate/App/LOAD_REPOS';
 export const LOAD_REPOS_SUCCESS = 'boilerplate/App/LOAD_REPOS_SUCCESS';
 export const LOAD_REPOS_ERROR = 'boilerplate/App/LOAD_REPOS_ERROR';
-export const ADD_SCOUT = 'wreath/containers/App/ADD_SCOUT';
+export const ADD_SCOUT = 'wreath/app/containers/App/ADD_SCOUT';
+export const REMOVE_SCOUT = 'wreath/app/containers/App/REMOVE_SCOUT';
+export const CHANGE_NEW_USERNAME = 'wreath/app/containers/App/CHANGE_NEW_USERNAME';
+export const CHANGE_NEW_SALE = 'wreath/app/containers/App/CHANGE_NEW_SALE';
+export const SUBMIT_BUTTON = 'wreath/app/containers/App/SUBMIT_BUTTON';
