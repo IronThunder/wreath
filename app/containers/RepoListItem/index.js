@@ -23,6 +23,7 @@ export class RepoListItem extends React.Component { // eslint-disable-line react
 
     // If the repository is owned by a different person than we got the data for
     // it's a fork and we should show the name of the owner
+
     if (item.owner.login !== this.props.currentUser) {
       nameprefix = `${item.owner.login}/`;
     }
@@ -30,13 +31,13 @@ export class RepoListItem extends React.Component { // eslint-disable-line react
     // Put together the content of the repository
     const content = (
       <div className={styles.linkWrapper}>
-        <A
+        <dev
           className={styles.linkRepo}
           href={item.html_url}
           target="_blank"
         >
           {nameprefix + item.name}
-        </A>
+        </dev>
         <A
           className={styles.linkIssues}
           href={`${item.html_url}/issues`}

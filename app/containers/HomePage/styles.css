@@ -40,3 +40,14 @@ label {
   color: black;
   margin-left: 0.4em;
 }
+
+.table {
+  padding: 5px;
+  border-spacing: 10px;
+  width: 100%;
+}
+
+th, td {
+  outline: thin solid black;
+  padding: 10px;
+}

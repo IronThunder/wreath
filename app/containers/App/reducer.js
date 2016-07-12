@@ -14,6 +14,7 @@ import {
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS,
   LOAD_REPOS_ERROR,
+  ADD_SCOUT
 } from './constants';
 import { fromJS } from 'immutable';
 
@@ -22,6 +23,7 @@ const initialState = fromJS({
   loading: false,
   error: false,
   currentUser: false,
+  scouts2: {default: {year: 0, sales: []}, DuncanVogel: {year: 2015, sales: [{type: 'Small', num: 1}, {type: 'Medium', num: 2}]}},
   userData: fromJS({
     repositories: false,
   }),

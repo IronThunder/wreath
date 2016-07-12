@@ -21,6 +21,11 @@ const selectError = () => createSelector(
   (globalState) => globalState.get('error')
 );
 
+const selectScouts2 = () => createSelector(
+    selectGlobal(),
+    (globalState) => globalState.get('scouts2')
+)
+
 const selectRepos = () => createSelector(
   selectGlobal(),
   (globalState) => globalState.getIn(['userData', 'repositories'])
@@ -49,4 +54,5 @@ export {
   selectError,
   selectRepos,
   selectLocationState,
+  selectScouts2,
 };
